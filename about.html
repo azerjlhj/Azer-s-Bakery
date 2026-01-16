@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azer's Bakery - About Us</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    header {
+      background-color: #CD7F32;
+      padding: 0px;
+      text-align: center;
+    }
+    footer {
+      background-color: #CD7F32;
+      padding: 5px;
+      text-align: center;
+    }
+    .logo {
+      height: 250px;
+      display: block;
+      margin: 0 auto;
+    }
+    nav {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: rgba(51, 51, 51, 0.95);
+      padding: 1em 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2em;
+      background-image: url('breadybro.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+    .main-content div {
+      max-width: 800px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px #000;
+    }
+    p {
+      color: white;
+      font-size: 1.1em;
+      margin-top: 20px;
+      line-height: 1.6;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .my-button {
+      background-color: #f0b400;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .my-button:hover {
+      background-color: #d49e00;
+    }
+  </style>
+  <script>
+    const translations = {
+      en: {
+        navHome: "Home",
+        navHow: "How It's Made",
+        navMenu: "Menu",
+        navAbout: "About Us",
+        navContact: "Contact",
+        title: "Our Story",
+        paragraph: `Azer's bakery is headquartered in Paterson, New Jersey. Our Company was founded in 2025. Since then, we have continuously grown our sales and added new product lines to our offerings. While we have experience in the overall food bakery and distribution industry, we focus primarily on baking traditional premium \"handmade\" breads, pastries, and desserts.<br><br>Due to the fact that we are a family owned and operated business, we are constantly driven to produce unique and superior products that satisfy the need of our customers from all around the world. Our team is passionate about our high standards and we use top quality wholesome ingredients and all our products are baked in brick hearth ovens and Kosher + Halal certified.<br><br>In addition to our deliveries to supermarkets, restaurants, other bakeries, hotels, and special events, for your convenience we also deliver our products via US carriers.`,
+        footerText: "&copy; 2025 by AZER'S BAKERY. All rights reserved."
+      },
+      es: {
+        navHome: "Inicio",
+        navHow: "Cómo se Hace",
+        navMenu: "Menú",
+        navAbout: "Sobre Nosotros",
+        navContact: "Contacto",
+        title: "Nuestra Historia",
+        paragraph: `La panadería de Azer tiene su sede en Paterson, Nueva Jersey. Nuestra empresa fue fundada en 2025. Desde entonces, hemos crecido continuamente en ventas y agregado nuevas líneas de productos a nuestras ofertas. Aunque tenemos experiencia en la industria de panadería y distribución de alimentos en general, nos enfocamos principalmente en hornear panes, pasteles y postres tradicionales y premium "hechos a mano".<br><br>Debido a que somos una empresa familiar y operada por sus dueños, estamos constantemente impulsados a producir productos únicos y superiores que satisfagan las necesidades de nuestros clientes de todo el mundo. Nuestro equipo es apasionado por nuestros altos estándares y utilizamos ingredientes saludables de alta calidad. Todos nuestros productos se hornean en hornos de ladrillo y están certificados como Kosher y Halal.<br><br>Además de nuestras entregas a supermercados, restaurantes, otras panaderías, hoteles y eventos especiales, para su comodidad también entregamos nuestros productos mediante transportistas estadounidenses.`,
+        footerText: "&copy; 2025 por LA PANADERÍA DE AZER. Todos los derechos reservados."
+      },
+      fr: {
+        navHome: "Accueil",
+        navHow: "Comment c'est Fait",
+        navMenu: "Menu",
+        navAbout: "À Propos",
+        navContact: "Contact",
+        title: "Notre Histoire",
+        paragraph: `La boulangerie d'Azer est basée à Paterson, New Jersey. Notre entreprise a été fondée en 2025. Depuis, nous avons constamment augmenté nos ventes et ajouté de nouvelles lignes de produits à notre offre. Bien que nous ayons de l'expérience dans l'industrie générale de la boulangerie et de la distribution alimentaire, nous nous concentrons principalement sur la fabrication de pains, pâtisseries et desserts traditionnels et artisanaux haut de gamme.<br><br>Comme nous sommes une entreprise familiale exploitée par ses propriétaires, nous sommes constamment motivés à produire des produits uniques et supérieurs qui répondent aux besoins de nos clients du monde entier. Notre équipe est passionnée par nos normes élevées et nous utilisons des ingrédients sains de qualité supérieure. Tous nos produits sont cuits dans des fours à briques et sont certifiés Kasher et Halal.<br><br>En plus de nos livraisons aux supermarchés, restaurants, autres boulangeries, hôtels et événements spéciaux, pour votre commodité, nous livrons également nos produits via des transporteurs américains.`,
+        footerText: "&copy; 2025 par LA BOULANGERIE D'AZER. Tous droits réservés."
+      }
+    };
+
+    function changeLanguage() {
+      const lang = document.getElementById("languageSelector").value;
+      const t = translations[lang];
+      document.getElementById("navHome").innerHTML = t.navHome;
+      document.getElementById("navHow").innerHTML = t.navHow;
+      document.getElementById("navMenu").innerHTML = t.navMenu;
+      document.getElementById("navAbout").innerHTML = t.navAbout;
+      document.getElementById("navContact").innerHTML = t.navContact;
+      document.getElementById("storyTitle").innerHTML = t.title;
+      document.getElementById("storyText").innerHTML = t.paragraph;
+      document.getElementById("footerText").innerHTML = t.footerText;
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <img src="breadlogo.png" alt="Azer's Bakery Logo" class="logo" />
+  </header>
+
+  <nav>
+    <a href="bakery.html" id="navHome">Home</a>
+    <a href="how.html" id="navHow">How It's Made</a>
+    <a href="menu.html" id="navMenu">Menu</a>
+    <a href="about.html" id="navAbout">About Us</a>
+    <a href="contact.html" id="navContact">Contact</a>
+    <select id="languageSelector" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+    </select>
+  </nav>
+
+  <section class="main-content">
+    <div>
+      <h1 id="storyTitle">Our Story</h1>
+      <p id="storyText">
+        Azer's bakey is headquartered in Paterson, New Jersey. Our Company was founded in 2025. Since then, we have continuously grown our sales and added new product lines to our offerings. While we have experience in the overall food bakery and distribution industry, we focus primarily on baking traditional premium "handmade" breads, pastries, and desserts.
+        <br><br>
+        Due to the fact that we are a family owned and operated business, we are constantly driven to produce unique and superior products that satisfy the need of our customers from all around the world. Our team is passionate about our high standards and we use top quality wholesome ingredients and all our products are baked in brick hearth ovens and Kosher + Halal certified.
+        <br><br>
+        In addition to our deliveries to supermarkets, restaurants, other bakeries, hotels, and special events, for your convenient we also deliver our products via US cariers.
+      </p>
+    </div>
+  </section>
+
+  <footer id="footerText">&copy; 2025 by AZER'S BAKERY. All rights reserved.</footer>
+</body>
+</html>
+
+

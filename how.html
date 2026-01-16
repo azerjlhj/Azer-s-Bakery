@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azer's Bakery - How It's Made</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      background-color: #CD7F32;
+      padding: 0px;
+      text-align: center;
+    }
+    footer {
+      background-color: #CD7F32;
+      padding: 5px;
+      text-align: center;
+    }
+    .logo {
+      height: 250px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: #333;
+      padding: 1em 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .first-main-content, .second-main-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 3em 2em;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+
+    .first-main-content {
+      background-image: url('bread.jpg');
+    }
+
+    .second-main-content {
+      background-image: url('pastries.png');
+    }
+
+    .first-main-content div, .second-main-content div {
+      max-width: 800px;
+      width: 100%;
+      padding: 2em;
+      border-radius: 12px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: white;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px #000;
+      margin-top: 50px;
+    }
+
+    h2 {
+      color: #f0f0f0;
+      margin-bottom: 15px;
+      font-weight: normal;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    p {
+      color: white;
+      font-size: 1.1em;
+      line-height: 1.6;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .my-button {
+      background-color: #f0b400;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1em;
+    }
+
+    .my-button:hover {
+      background-color: #d49e00;
+    }
+  </style>
+  <script>
+    const translations = {
+      en: {
+        navHome: "Home",
+        navHow: "How It's Made",
+        navMenu: "Menu",
+        navAbout: "About Us",
+        navContact: "Contact",
+        section1Title: "Our Bread is Always Fresh",
+        section1Subtitle: "Straight from our oven — never processed",
+        section1Text: "Our bread is baked fresh daily—warm, soft, and full of natural moisture. This freshness comes from the steam inside and the absence of preservatives. Left unwrapped, bread begins to stale within a day or two as moisture escapes. That's why we recommend enjoying our loaves shortly after baking for the best taste and texture.",
+        section2Title: "The Taste of Our Pastries",
+        section2Subtitle: "Never to be Forgotten",
+        section2Text: "At our bakery, every pastry is a bite of bliss—light, flaky layers wrapped around rich, buttery goodness. Whether sweet or savory, our pastries are handcrafted daily using time-honored techniques and the finest ingredients. From fruit-filled delights to creamy custards and golden, melt-in-your-mouth dough, we bake joy into every bite. Come taste the difference—where passion meets perfection.",
+        footerText: "&copy; 2025 by AZER'S BAKERY. All rights reserved."
+      },
+      es: {
+        navHome: "Inicio",
+        navHow: "Cómo se Hace",
+        navMenu: "Menú",
+        navAbout: "Sobre Nosotros",
+        navContact: "Contacto",
+        section1Title: "Nuestro Pan Siempre es Fresco",
+        section1Subtitle: "Directo de nuestro horno — nunca procesado",
+        section1Text: "Nuestro pan se hornea fresco todos los días: cálido, suave y lleno de humedad natural. Esta frescura proviene del vapor interno y la ausencia de conservantes. Si se deja sin envolver, el pan comienza a ponerse rancio en uno o dos días a medida que la humedad se escapa. Por eso recomendamos disfrutar nuestras hogazas poco después de hornearlas para obtener el mejor sabor y textura.",
+        section2Title: "El Sabor de Nuestros Pasteles",
+        section2Subtitle: "Nunca Olvidado",
+        section2Text: "En nuestra panadería, cada pastel es un bocado de felicidad: capas ligeras y hojaldradas envueltas en una rica bondad mantecosa. Ya sean dulces o salados, nuestros pasteles se elaboran a mano todos los días utilizando técnicas tradicionales y los mejores ingredientes. Desde delicias rellenas de frutas hasta natillas cremosas y masa dorada que se derrite en la boca, horneamos alegría en cada bocado. Ven a probar la diferencia—donde la pasión se encuentra con la perfección.",
+        footerText: "&copy; 2025 por LA PANADERÍA DE AZER. Todos los derechos reservados."
+      },
+      fr: {
+        navHome: "Accueil",
+        navHow: "Comment c'est Fait",
+        navMenu: "Menu",
+        navAbout: "À Propos",
+        navContact: "Contact",
+        section1Title: "Notre Pain est Toujours Frais",
+        section1Subtitle: "Directement de notre four — jamais transformé",
+        section1Text: "Notre pain est cuit frais tous les jours — chaud, moelleux et plein d'humidité naturelle. Cette fraîcheur vient de la vapeur à l'intérieur et de l'absence de conservateurs. Non emballé, le pain commence à rassir en un jour ou deux à mesure que l'humidité s'échappe. C'est pourquoi nous vous recommandons de savourer nos miches peu après la cuisson pour un goût et une texture optimaux.",
+        section2Title: "Le Goût de Nos Pâtisseries",
+        section2Subtitle: "Inoubliable",
+        section2Text: "Dans notre boulangerie, chaque pâtisserie est une bouchée de bonheur — des couches légères et feuilletées enveloppées de richesse beurrée. Qu'elles soient sucrées ou salées, nos pâtisseries sont faites à la main chaque jour avec des techniques traditionnelles et les meilleurs ingrédients. Des délices aux fruits aux crèmes pâtissières onctueuses et à la pâte dorée fondante, nous mettons de la joie dans chaque bouchée. Venez goûter la différence — là où la passion rencontre la perfection.",
+        footerText: "&copy; 2025 par LA BOULANGERIE D'AZER. Tous droits réservés."
+      }
+    };
+
+    function changeLanguage() {
+      const lang = document.getElementById('languageSelector').value;
+      const t = translations[lang];
+      document.getElementById('navHome').innerHTML = t.navHome;
+      document.getElementById('navHow').innerHTML = t.navHow;
+      document.getElementById('navMenu').innerHTML = t.navMenu;
+      document.getElementById('navAbout').innerHTML = t.navAbout;
+      document.getElementById('navContact').innerHTML = t.navContact;
+      document.getElementById('section1Title').innerHTML = t.section1Title;
+      document.getElementById('section1Subtitle').innerHTML = t.section1Subtitle;
+      document.getElementById('section1Text').innerHTML = t.section1Text;
+      document.getElementById('section2Title').innerHTML = t.section2Title;
+      document.getElementById('section2Subtitle').innerHTML = t.section2Subtitle;
+      document.getElementById('section2Text').innerHTML = t.section2Text;
+      document.getElementById('footerText').innerHTML = t.footerText;
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <img src="breadlogo.png" alt="Azer's Bakery Logo" class="logo" />
+  </header>
+
+  <nav>
+    <a href="bakery.html" id="navHome">Home</a> 
+    <a href="how.html" id="navHow">How It's Made</a> 
+    <a href="menu.html" id="navMenu">Menu</a> 
+    <a href="about.html" id="navAbout">About Us</a>
+    <a href="contact.html" id="navContact">Contact</a>
+    <select id="languageSelector" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+    </select>
+  </nav>
+
+  <section class="first-main-content">
+    <div>
+      <h1 id="section1Title">Our Bread is Always Fresh</h1>
+      <h2 id="section1Subtitle">Straight from our oven — never processed</h2>
+      <p id="section1Text">
+        Our bread is baked fresh daily—warm, soft, and full of natural moisture. 
+        This freshness comes from the steam inside and the absence of preservatives. 
+        Left unwrapped, bread begins to stale within a day or two as moisture escapes. 
+        That's why we recommend enjoying our loaves shortly after baking for the best taste and texture.
+      </p>
+    </div>
+  </section>
+
+  <section class="second-main-content">
+    <div>
+      <h1 id="section2Title">The Taste of Our Pastries</h1>
+      <h2 id="section2Subtitle">Never to be Forgotten</h2>
+      <p id="section2Text">
+        At our bakery, every pastry is a bite of bliss—light, flaky layers wrapped around rich, buttery goodness. 
+        Whether sweet or savory, our pastries are handcrafted daily using time-honored techniques and the finest ingredients. 
+        From fruit-filled delights to creamy custards and golden, melt-in-your-mouth dough, we bake joy into every bite. 
+        Come taste the difference—where passion meets perfection.
+      </p>
+    </div>
+  </section>
+
+  <footer id="footerText">&copy; 2025 by AZER'S BAKERY. All rights reserved.</footer>
+</body>
+</html>
+
+

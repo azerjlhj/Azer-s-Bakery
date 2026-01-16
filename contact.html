@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azer's Bakery - Contact Us</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #000;
+    }
+
+    header {
+      background-color: #CD7F32;
+      padding: 0;
+      text-align: center;
+    }
+    footer {
+      background-color: #CD7F32;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .logo {
+      height: 250px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: #333;
+      padding: 1em 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2em;
+      gap: 40px;
+
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0.5)
+        ),
+        url('breadflour.webp');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: #000;
+      min-height: 100vh;
+    }
+
+
+
+    .main-content h1 {
+      font-size: 48px;
+      color: white;
+      margin: 10px 0 20px;
+      text-shadow: 3px 3px 6px #000;
+      text-align: center;
+    }
+
+    .form-area {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .left-info {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 35px 40px;
+      border-radius: 14px;
+      width: 320px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    .left-info h2 {
+      margin-top: 0;
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .left-info p {
+      font-size: 1.1em;
+      color: #444;
+      margin: 12px 0;
+    }
+
+    .left-info ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .left-info ul li {
+      font-size: 1.05em;
+      margin: 8px 0;
+      color: #222;
+    }
+
+    .highlight {
+      color: #CD7F32;
+      font-weight: bold;
+    }
+
+    .right-form {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 14px;
+      width: 320px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+    .right-form h2 {
+      margin-top: 0;
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      text-align: left;
+      color: #222;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 1em;
+      background-color: #fdfdfd;
+    }
+
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: #f0b400;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #d49e00;
+    }
+
+    #thank-you-message {
+      font-size: 1.2em;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 12px 20px;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    .address-block {
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.1em;
+      color: #333;
+      border-top: 1px solid #ccc;
+    }
+
+    @media (max-width: 700px) {
+      .form-area {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .main-content h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="breadlogo.png" alt="Azer's Bakery Logo" class="logo" />
+  </header>
+
+  <nav>
+    <a href="bakery.html" id="navHome">Home</a> 
+    <a href="how.html" id="navHow">How It's Made</a> 
+    <a href="menu.html" id="navMenu">Menu</a> 
+    <a href="about.html" id="navAbout">About Us</a>
+    <a href="contact.html" id="navContact">Contact</a>
+    <select id="languageSelector" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+    </select>
+  </nav>
+
+  <section class="main-content">
+    <h1 id="contactTitle">Contact Us</h1>
+
+    <div id="thank-you-message">Thanks for submitting!</div>
+
+    <div class="form-area">
+      <div class="left-info">
+        <h2 id="visitTitle">Visit or Call</h2>
+        <p><span class="highlight" id="phoneLabel">Phone:</span> (123) 456-7890</p>
+        <p><span class="highlight" id="faxLabel">Fax:</span> (123) 456-7891</p>
+        <p><span class="highlight" id="hoursLabel">Business Hours:</span></p>
+        <ul>
+          <li id="hoursWeekdays">Monday – Friday: 8:00 AM – 8:00 PM</li>
+          <li id="hoursSaturday">Saturday: 9:00 AM – 6:00 PM</li>
+          <li id="hoursSunday">Sunday: Closed</li>
+        </ul>
+      </div>
+
+      <div class="right-form">
+        <h2 id="emailTitle">Email Us</h2>
+        <form id="contactForm">
+          <label for="name" id="labelName">Your Name:</label>
+          <input type="text" id="name" name="name" placeholder="First and Last Name" required>
+
+          <label for="email" id="labelEmail">Your Email:</label>
+          <input type="text" id="email" name="email" placeholder="Email" required>
+
+          <label for="message" id="labelMessage">Message:</label>
+          <textarea id="message" name="message" placeholder="Your message" required></textarea>
+
+          <input type="submit" id="submitButton" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div class="address-block">
+      <h2 id="addressTitle">Address</h2>
+      123 Sweetbread Avenue, Suite B<br>
+      Bakersville, NJ 07001<br>
+      United States
+    </div>
+  </section>
+
+  <footer id="footerText">&copy; 2025 by AZER'S BAKERY. All rights reserved.</footer>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const message = document.getElementById('thank-you-message');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      message.style.display = 'block';
+      form.reset();
+      setTimeout(() => {
+        message.style.display = 'none';
+      }, 5000);
+    });
+
+    const translations = {
+      en: {
+        navHome: "Home",
+        navHow: "How It's Made",
+        navMenu: "Menu",
+        navAbout: "About Us",
+        navContact: "Contact",
+        contactTitle: "Contact Us",
+        visitTitle: "Visit or Call",
+        phoneLabel: "Phone:",
+        faxLabel: "Fax:",
+        hoursLabel: "Business Hours:",
+        hoursWeekdays: "Monday – Friday: 8:00 AM – 8:00 PM",
+        hoursSaturday: "Saturday: 9:00 AM – 6:00 PM",
+        hoursSunday: "Sunday: Closed",
+        emailTitle: "Email Us",
+        labelName: "Your Name:",
+        labelEmail: "Your Email:",
+        labelMessage: "Message:",
+        submitButton: "Submit",
+        addressTitle: "Address",
+        footerText: "&copy; 2025 by AZER'S BAKERY. All rights reserved."
+      },
+      es: {
+        navHome: "Inicio",
+        navHow: "Cómo se Hace",
+        navMenu: "Menú",
+        navAbout: "Sobre Nosotros",
+        navContact: "Contacto",
+        contactTitle: "Contáctanos",
+        visitTitle: "Visítanos o Llama",
+        phoneLabel: "Teléfono:",
+        faxLabel: "Fax:",
+        hoursLabel: "Horario Comercial:",
+        hoursWeekdays: "Lunes – Viernes: 8:00 AM – 8:00 PM",
+        hoursSaturday: "Sábado: 9:00 AM – 6:00 PM",
+        hoursSunday: "Domingo: Cerrado",
+        emailTitle: "Envíanos un Correo",
+        labelName: "Tu Nombre:",
+        labelEmail: "Tu Correo:",
+        labelMessage: "Mensaje:",
+        submitButton: "Enviar",
+        addressTitle: "Dirección",
+        footerText: "&copy; 2025 por LA PANADERÍA DE AZER. Todos los derechos reservados."
+      },
+      fr: {
+        navHome: "Accueil",
+        navHow: "Comment c'est Fait",
+        navMenu: "Menu",
+        navAbout: "À Propos",
+        navContact: "Contact",
+        contactTitle: "Contactez-Nous",
+        visitTitle: "Visitez ou Appelez",
+        phoneLabel: "Téléphone:",
+        faxLabel: "Fax:",
+        hoursLabel: "Heures d'ouverture:",
+        hoursWeekdays: "Lundi – Vendredi: 8:00 – 20:00",
+        hoursSaturday: "Samedi: 9:00 – 18:00",
+        hoursSunday: "Dimanche: Fermé",
+        emailTitle: "Envoyez-nous un Mail",
+        labelName: "Votre Nom:",
+        labelEmail: "Votre Email:",
+        labelMessage: "Message:",
+        submitButton: "Envoyer",
+        addressTitle: "Adresse",
+        footerText: "&copy; 2025 par LA BOULANGERIE D'AZER. Tous droits réservés."
+      }
+    };
+
+    function changeLanguage() {
+      const lang = document.getElementById("languageSelector").value;
+      const t = translations[lang];
+      document.getElementById("navHome").innerHTML = t.navHome;
+      document.getElementById("navHow").innerHTML = t.navHow;
+      document.getElementById("navMenu").innerHTML = t.navMenu;
+      document.getElementById("navAbout").innerHTML = t.navAbout;
+      document.getElementById("navContact").innerHTML = t.navContact;
+      document.getElementById("contactTitle").innerHTML = t.contactTitle;
+      document.getElementById("visitTitle").innerHTML = t.visitTitle;
+      document.getElementById("phoneLabel").innerHTML = t.phoneLabel;
+      document.getElementById("faxLabel").innerHTML = t.faxLabel;
+      document.getElementById("hoursLabel").innerHTML = t.hoursLabel;
+      document.getElementById("hoursWeekdays").innerHTML = t.hoursWeekdays;
+      document.getElementById("hoursSaturday").innerHTML = t.hoursSaturday;
+      document.getElementById("hoursSunday").innerHTML = t.hoursSunday;
+      document.getElementById("emailTitle").innerHTML = t.emailTitle;
+      document.getElementById("labelName").innerHTML = t.labelName;
+      document.getElementById("labelEmail").innerHTML = t.labelEmail;
+      document.getElementById("labelMessage").innerHTML = t.labelMessage;
+      document.getElementById("submitButton").value = t.submitButton;
+      document.getElementById("addressTitle").innerHTML = t.addressTitle;
+      document.getElementById("footerText").innerHTML = t.footerText;
+    }
+  </script>
+
+  <footer id="footerText">&copy; 2025 by AZER'S BAKERY. All rights reserved.</footer>
+</body>
+</html>

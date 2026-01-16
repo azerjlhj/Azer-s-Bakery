@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Azer's Bakery - Home</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #CD7F32;
+      text-align: center;
+    }
+    footer {
+      background-color: #CD7F32;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .logo {
+      height: 250px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .pricespecial {
+      width: 600px;
+      height: 400px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: rgba(51, 51, 51, 0.95);
+      padding: 1em 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2em;
+      background-image: url('woodenbackground.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      color: white;
+      margin: 10px 0;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    h2 {
+      color: gold;
+      margin-bottom: 10px;
+      font-weight: normal;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    p {
+      color: white;
+      font-size: 1.1em;
+      line-height: 1.6;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .my-button {
+      background-color: #f0b400;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1.5em;
+    }
+
+    .my-button:hover {
+      background-color: #d49e00;
+    }
+
+    .gallery-section {
+      margin-top: 3em;
+      text-align: center;
+    }
+
+    .main-image {
+      width: 600px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 2px 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .thumbnail-wrapper {
+      position: relative;
+      width: 660px;
+      margin: 1.5em auto;
+    }
+
+    .thumbnail-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 10px;
+      padding: 5px;
+    }
+
+    .thumbnail-container img {
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .thumbnail-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 5px rgba(255,255,255,0.8);
+    }
+
+    .thumbnail-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scroll-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      z-index: 10;
+    }
+
+    .scroll-left {
+      left: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.1), transparent);
+    }
+
+    .scroll-right {
+      right: 0;
+      background: linear-gradient(to left, rgba(0,0,0,0.1), transparent);
+    }
+  </style>
+
+  <script>
+    function switchImage(src) {
+      document.getElementById('mainDisplayImage').src = src;
+    }
+
+    let scrollInterval;
+
+    function startScroll(direction) {
+      const container = document.querySelector('.thumbnail-container');
+      scrollInterval = setInterval(() => {
+        container.scrollLeft += direction * 4;
+      }, 10);
+    }
+
+    function stopScroll() {
+      clearInterval(scrollInterval);
+    }
+
+    const translations = {
+      en: {
+        welcomeTitle: "Welcome to Our Bakery",
+        mainTitle: "Pastry with Love",
+        mainParagraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        orderButton: "Order Now",
+        special1Title: "Fudge Drip for Five Dollars",
+        special1Text: "Get your Fudge Brownie PLUS Drip Coffee for at least 10% off.",
+        special2Title: "The American Special - The Special Apple.",
+        special2Text: "Get your Apple Danish PLUS your Americano for only six dollars. It does feel like being a Danish in America!",
+        navHome: "Home",
+        navHow: "How It's Made",
+        navMenu: "Menu",
+        navAbout: "About Us",
+        navContact: "Contact",
+        footerText: "&copy; 2025 by AZER'S BAKERY. All rights reserved."
+      },
+      es: {
+        welcomeTitle: "Bienvenido a Nuestra Panadería",
+        mainTitle: "Pasteles con Amor",
+        mainParagraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        orderButton: "Ordenar Ahora",
+        special1Title: "Fudge Goteo por Cinco Dólares",
+        special1Text: "Obtén tu Brownie de Fudge MÁS café por al menos un 10% de descuento.",
+        special2Title: "El Especial Americano - La Manzana Especial.",
+        special2Text: "Consigue tu Danés de Manzana MÁS tu Americano por solo seis dólares. ¡Se siente como ser danés en América!",
+        navHome: "Inicio",
+        navHow: "Cómo se Hace",
+        navMenu: "Menú",
+        navAbout: "Sobre Nosotros",
+        navContact: "Contacto",
+        footerText: "&copy; 2025 por LA PANADERÍA DE AZER. Todos los derechos reservados."
+      },
+      fr: {
+        welcomeTitle: "Bienvenue dans Notre Boulangerie",
+        mainTitle: "Pâtisserie avec Amour",
+        mainParagraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        orderButton: "Commander Maintenant",
+        special1Title: "Fudge Goutte pour Cinq Dollars",
+        special1Text: "Obtenez votre Brownie au Fudge PLUS un café filtre avec au moins 10% de réduction.",
+        special2Title: "Le Spécial Américain - La Pomme Spéciale.",
+        special2Text: "Prenez votre Danois aux Pommes PLUS votre Américano pour seulement six dollars. C’est comme être Danois en Amérique !",
+        navHome: "Accueil",
+        navHow: "Comment c'est Fait",
+        navMenu: "Menu",
+        navAbout: "À Propos",
+        navContact: "Contact",
+        footerText: "&copy; 2025 par LA BOULANGERIE D'AZER. Tous droits réservés."
+      }
+    };
+
+    function changeLanguage() {
+      const selectedLang = document.getElementById("languageSelector").value;
+      const content = translations[selectedLang];
+      for (let key in content) {
+        const el = document.getElementById(key);
+        if (el) {
+          el.innerHTML = content[key].replace(/\n/g, "<br>");
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <header>
+    <img src="breadlogo.png" alt="Azer's Bakery Logo" class="logo" />
+  </header>
+
+  <nav>
+    <a href="bakery.html" id="navHome">Home</a> 
+    <a href="how.html" id="navHow">How It's Made</a> 
+    <a href="menu.html" id="navMenu">Menu</a> 
+    <a href="about.html" id="navAbout">About Us</a>
+    <a href="contact.html" id="navContact">Contact</a>
+    <select id="languageSelector" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+    </select>
+  </nav>
+
+  <section class="main-content">
+    <div>
+      <h2 id="welcomeTitle">Welcome to Our Bakery</h2>
+      <h1 id="mainTitle">Pastry with Love</h1>
+      <p id="mainParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br>
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <button class="my-button" onclick="window.location.href='order.html';" id="orderButton">Order Now</button>
+
+      <div class="gallery-section">
+        <img id="mainDisplayImage" src="images/image1.jpg" alt="Main Display" class="main-image" />
+
+        <div class="thumbnail-wrapper">
+          <div class="scroll-zone scroll-left" onmouseover="startScroll(-4)" onmouseout="stopScroll()"></div>
+          <div class="scroll-zone scroll-right" onmouseover="startScroll(4)" onmouseout="stopScroll()"></div>
+
+          <div class="thumbnail-container">
+            <img src="images/image1.jpg" onclick="switchImage(this.src)" alt="1">
+            <img src="images/image2.png" onclick="switchImage(this.src)" alt="2">
+            <img src="images/image3.jpg" onclick="switchImage(this.src)" alt="3">
+            <img src="images/image4.jpg" onclick="switchImage(this.src)" alt="4">
+            <img src="images/image5.webp" onclick="switchImage(this.src)" alt="5">
+            <img src="images/image6.jpg" onclick="switchImage(this.src)" alt="6">
+            <img src="images/image7.jpg" onclick="switchImage(this.src)" alt="7">
+            <img src="images/image8.jpg" onclick="switchImage(this.src)" alt="8">
+            <img src="images/image9.jpg" onclick="switchImage(this.src)" alt="9">
+            <img src="images/image10.jpg" onclick="switchImage(this.src)" alt="10">
+          </div>
+        </div>
+      </div>
+
+      <div class="pricespecialintext">
+        <h2 id="special1Title">Fudge Drip for Five Dollars</h2>
+        <p id="special1Text">Get your Fudge Brownie PLUS Drip Coffee for at least 10&#37; off.</p>
+        <img src="dripfudge.webp" alt="Fudge Drip" class="pricespecial" />
+      </div>
+
+      <div class="pricespecialintext">
+        <h2 id="special2Title">The American Special - The Special Apple.</h2>
+        <p id="special2Text">Get your Apple Danish PLUS your Americano for only six dollars. It does feel like being a Danish in America!</p>
+        <img src="americanapple.jpg" alt="American Apple" class="pricespecial" />
+      </div>
+
+    </div>
+  </section>
+
+  <footer id="footerText">&copy; 2025 by AZER'S BAKERY. All rights reserved.</footer>
+
+</body>
+</html>
+
+
+
+
+
+

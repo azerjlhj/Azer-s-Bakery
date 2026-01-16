@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Azer's Bakery - Order</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #CD7F32;
+      text-align: center;
+    }
+
+    .logo {
+      height: 250px;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: #333;
+      padding: 1em 0;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #f0b400;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2em;
+      background: url('orderbackground.jpg') center/cover no-repeat;
+    }
+
+    .main-content > div {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 2em;
+      border-radius: 16px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 0.5em;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    h2 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 1em;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .form-wrapper {
+      background-color: #fff;
+      padding: 2em;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      margin-top: 2em;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .form-columns {
+      display: flex;
+      gap: 2em;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .form-section {
+      flex: 1 1 300px;
+      min-width: 280px;
+    }
+
+    h3 {
+      color: #333;
+      margin-bottom: 0.5em;
+    }
+
+    .item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75em;
+    }
+
+    .item-row label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .item-row input[type="number"] {
+      width: 60px;
+      margin-left: 10px;
+      padding: 4px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+
+    .submit-wrapper {
+      text-align: center;
+      margin-top: 2em;
+    }
+
+    .submit-wrapper input[type="submit"] {
+      background-color: #f0b400;
+      color: white;
+      border: none;
+      padding: 12px 26px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .submit-wrapper input[type="submit"]:hover {
+      background-color: #d49e00;
+    }
+
+    .total-select {
+      margin-top: 1.5em;
+      font-size: 1rem;
+      padding: 0.5em;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #333, #555);
+      color: #fff;
+      padding: 1em 1.5em;
+      border-radius: 10px;
+      font-size: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    footer {
+      background-color: #CD7F32;
+      color: white;
+      text-align: center;
+      padding: 0.75em 0;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .form-wrapper {
+        padding: 1.5em;
+      }
+
+      nav a {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="breadlogo.png" alt="Azer's Bakery Logo" class="logo" />
+</header>
+
+<nav>
+  <a href="bakery.html" id="navHome">Home</a>
+  <a href="how.html" id="navHow">How It's Made</a>
+  <a href="menu.html" id="navMenu">Menu</a>
+  <a href="about.html" id="navAbout">About Us</a>
+  <a href="contact.html" id="navContact">Contact</a>
+  <select id="languageSelector" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+  </select>
+</nav>
+
+<section class="main-content">
+  <div>
+    <h1 id="mainTitle">Ordering Time</h1>
+    <h2 id="instruction">Choose your favorites below. If unsure, check our menu first! Remember: special discounts you see on our home page <strong>do apply</strong>.</h2>
+
+    <div class="form-wrapper" id="orderFormWrapper">
+      <form id="orderForm">
+        <div class="form-columns">
+          <div class="form-section" id="itemsSection">
+            <h3>Breads</h3>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Sourdough:5.00"> Sourdough Loaf ($5.00)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Multigrain:5.50"> Multigrain Loaf ($5.50)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Baguette:3.50"> Baguette ($3.50)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Brioche:6.00"> Brioche Loaf ($6.00)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Focaccia:4.75"> Focaccia ($4.75)</label><input type="number" min="1" value="1"></div>
+
+            <h3>Pastries</h3>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Butter Croissant:3.25"> Butter Croissant ($3.25)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Almond Croissant:3.75"> Almond Croissant ($3.75)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Chocolate Croissant:3.75"> Chocolate Croissant ($3.75)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Apple Danish:3.50"> Apple Danish ($3.50)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Cinnamon Roll:4.00"> Cinnamon Roll ($4.00)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Cheese Danish:3.50"> Cheese Danish ($3.50)</label><input type="number" min="1" value="1"></div>
+
+            <h3>Sweets & Treats</h3>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Chocolate Chip Cookie:2.00"> Chocolate Chip Cookie ($2.00)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Oatmeal Raisin Cookie:2.00"> Oatmeal Raisin Cookie ($2.00)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Fudge Brownie:3.00"> Fudge Brownie ($3.00)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Cupcakes:3.50"> Cupcakes ($3.50)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Carrot Cake:4.25"> Carrot Cake ($4.25)</label><input type="number" min="1" value="1"></div>
+
+            <h3>Beverages</h3>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Drip Coffee:2.50"> Drip Coffee ($2.50)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Espresso:2.75"> Espresso ($2.75)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Americano:3.00"> Americano ($3.00)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Cappuccino:3.75"> Cappuccino ($3.75)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Latte:4.25"> Latte ($4.25)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Hot Chocolate:3.50"> Hot Chocolate ($3.50)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Iced Coffee:3.25"> Iced Coffee ($3.25)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Bottled Water:1.50"> Bottled Water ($1.50)</label><input type="number" min="1" value="1"></div>
+            <div class="item-row"><label><input type="checkbox" name="item" value="Orange Juice:2.75"> Orange Juice ($2.75)</label><input type="number" min="1" value="1"></div>
+          </div>
+        </div>
+
+        <select id="totalDisplay" class="total-select" disabled>
+          <option value="0">Total: $0.00</option>
+        </select>
+
+        <div class="submit-wrapper">
+          <input type="submit" value="Submit Order">
+        </div>
+      </form>
+    </div>
+
+    <div class="form-wrapper" id="paymentFormWrapper" style="display: none;">
+      <form id="paymentForm">
+        <h2 id="securePaymentHeading" style="text-align:center; color:#333; margin-bottom: 1em;">Secure Payment</h2>
+        <div style="margin-bottom: 1.25em;">
+          <label for="cardName" id="labelCardName">Name on Card</label>
+          <input type="text" name="cardName" id="cardName" required placeholder="e.g. John Doe" style="width: 100%; padding: 0.75em; border-radius: 8px; border: 1px solid #ccc;">
+        </div>
+
+        <div style="margin-bottom: 1.25em;">
+          <label for="cardNumber" id="labelCardNumber">Card Number</label>
+          <input type="text" name="cardNumber" id="cardNumber" maxlength="16" required placeholder="1234 5678 9012 3456" style="width: 100%; padding: 0.75em; border-radius: 8px; border: 1px solid #ccc;">
+        </div>
+
+        <div style="display: flex; gap: 1em; margin-bottom: 1.25em;">
+          <div style="flex: 1;">
+            <label for="expiry" id="labelExpiry">Expiration Date</label>
+            <input type="month" name="expiry" id="expiry" required style="width: 100%; padding: 0.75em; border-radius: 8px; border: 1px solid #ccc;">
+          </div>
+          <div style="flex: 1;">
+            <label for="cvv" id="labelCVV">CVV</label>
+            <input type="text" name="cvv" id="cvv" maxlength="4" required placeholder="123" style="width: 100%; padding: 0.75em; border-radius: 8px; border: 1px solid #ccc;">
+          </div>
+        </div>
+
+        <div class="submit-wrapper">
+          <input type="submit" id="completePaymentButton" value="Complete Payment" style="background-color: #28a745;">
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<footer id="footerText">&copy; 2025 by AZER'S BAKERY. All rights reserved.</footer>
+
+<script>
+  const translations = {
+    en: {
+      navHome: "Home",
+      navHow: "How It's Made",
+      navMenu: "Menu",
+      navAbout: "About Us",
+      navContact: "Contact",
+      mainTitle: "Ordering Time",
+      instruction: "Choose your favorites below. If unsure, check our menu first! Remember: special discounts you see on our home page <strong>do apply</strong>.",
+      footerText: "&copy; 2025 by AZER'S BAKERY. All rights reserved.",
+      securePaymentHeading: "Secure Payment",
+      labelCardName: "Name on Card",
+      labelCardNumber: "Card Number",
+      labelExpiry: "Expiration Date",
+      labelCVV: "CVV",
+      completePaymentButton: "Complete Payment"
+    },
+    es: {
+      navHome: "Inicio",
+      navHow: "Cómo se Hace",
+      navMenu: "Menú",
+      navAbout: "Sobre Nosotros",
+      navContact: "Contacto",
+      mainTitle: "Hora de Pedir",
+      instruction: "Elige tus favoritos abajo. Si tienes dudas, revisa nuestro menú primero. Recuerda: los descuentos especiales que ves en la página principal <strong>sí aplican</strong>.",
+      footerText: "&copy; 2025 por LA PANADERÍA DE AZER. Todos los derechos reservados.",
+      securePaymentHeading: "Pago Seguro",
+      labelCardName: "Nombre en la Tarjeta",
+      labelCardNumber: "Número de Tarjeta",
+      labelExpiry: "Fecha de Expiración",
+      labelCVV: "CVV",
+      completePaymentButton: "Completar Pago"
+    },
+    fr: {
+      navHome: "Accueil",
+      navHow: "Comment c'est Fait",
+      navMenu: "Menu",
+      navAbout: "À Propos",
+      navContact: "Contact",
+      mainTitle: "Passer Commande",
+      instruction: "Choisissez vos favoris ci-dessous. En cas de doute, consultez notre menu d'abord ! N'oubliez pas : les promotions affichées sur notre page d'accueil <strong>s'appliquent</strong>.",
+      footerText: "&copy; 2025 par LA BOULANGERIE D'AZER. Tous droits réservés.",
+      securePaymentHeading: "Paiement Sécurisé",
+      labelCardName: "Nom sur la Carte",
+      labelCardNumber: "Numéro de Carte",
+      labelExpiry: "Date d'Expiration",
+      labelCVV: "CVV",
+      completePaymentButton: "Valider le Paiement"
+    }
+  };
+
+  const itemLabels = {
+    en: [
+      "Sourdough Loaf ($5.00)", "Multigrain Loaf ($5.50)", "Baguette ($3.50)", "Brioche Loaf ($6.00)", "Focaccia ($4.75)",
+      "Butter Croissant ($3.25)", "Almond Croissant ($3.75)", "Chocolate Croissant ($3.75)", "Apple Danish ($3.50)", "Cinnamon Roll ($4.00)", "Cheese Danish ($3.50)",
+      "Chocolate Chip Cookie ($2.00)", "Oatmeal Raisin Cookie ($2.00)", "Fudge Brownie ($3.00)", "Cupcakes ($3.50)", "Carrot Cake ($4.25)",
+      "Drip Coffee ($2.50)", "Espresso ($2.75)", "Americano ($3.00)", "Cappuccino ($3.75)", "Latte ($4.25)", "Hot Chocolate ($3.50)", "Iced Coffee ($3.25)", "Bottled Water ($1.50)", "Orange Juice ($2.75)"
+    ],
+    es: [
+      "Pan Sourdough ($5.00)", "Pan Multigrano ($5.50)", "Baguette ($3.50)", "Pan Brioche ($6.00)", "Focaccia ($4.75)",
+      "Croissant de Mantequilla ($3.25)", "Croissant de Almendra ($3.75)", "Croissant de Chocolate ($3.75)", "Danish de Manzana ($3.50)", "Rollito de Canela ($4.00)", "Danish de Queso ($3.50)",
+      "Galleta con Chispas ($2.00)", "Galleta de Avena ($2.00)", "Brownie ($3.00)", "Cupcakes ($3.50)", "Pastel de Zanahoria ($4.25)",
+      "Café de Filtro ($2.50)", "Espresso ($2.75)", "Americano ($3.00)", "Capuchino ($3.75)", "Latte ($4.25)", "Chocolate Caliente ($3.50)", "Café Helado ($3.25)", "Agua Embotellada ($1.50)", "Jugo de Naranja ($2.75)"
+    ],
+    fr: [
+      "Pain au Levain ($5.00)", "Pain Multigrains ($5.50)", "Baguette ($3.50)", "Pain Brioche ($6.00)", "Focaccia ($4.75)",
+      "Croissant au Beurre ($3.25)", "Croissant aux Amandes ($3.75)", "Croissant au Chocolat ($3.75)", "Danish aux Pommes ($3.50)", "Roulé à la Cannelle ($4.00)", "Danish au Fromage ($3.50)",
+      "Cookie aux Pépites ($2.00)", "Cookie à l'Avoine ($2.00)", "Brownie ($3.00)", "Cupcakes ($3.50)", "Gâteau aux Carottes ($4.25)",
+      "Café Filtré ($2.50)", "Espresso ($2.75)", "Américano ($3.00)", "Cappuccino ($3.75)", "Latte ($4.25)", "Chocolat Chaud ($3.50)", "Café Glacé ($3.25)", "Eau en Bouteille ($1.50)", "Jus d'Orange ($2.75)"
+    ]
+  };
+
+function attachCheckboxListeners() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+  checkboxes.forEach(cb => {
+    const qtyInput = cb.closest('.item-row').querySelector('input[type="number"]');
+
+    // Initial state
+    qtyInput.disabled = !cb.checked;
+
+    cb.addEventListener('change', () => {
+      qtyInput.disabled = !cb.checked;
+      calculateTotal();
+    });
+
+    qtyInput.addEventListener('input', calculateTotal);
+  });
+}
+
+
+
+  function changeLanguage() {
+    const lang = document.getElementById("languageSelector").value;
+    const t = translations[lang];
+
+    // Text elements
+    document.getElementById("navHome").innerHTML = t.navHome;
+    document.getElementById("navHow").innerHTML = t.navHow;
+    document.getElementById("navMenu").innerHTML = t.navMenu;
+    document.getElementById("navAbout").innerHTML = t.navAbout;
+    document.getElementById("navContact").innerHTML = t.navContact;
+    document.getElementById("mainTitle").innerHTML = t.mainTitle;
+    document.getElementById("instruction").innerHTML = t.instruction;
+    document.getElementById("footerText").innerHTML = t.footerText;
+    document.getElementById("securePaymentHeading").innerHTML = t.securePaymentHeading;
+    document.getElementById("labelCardName").innerHTML = t.labelCardName;
+    document.getElementById("labelCardNumber").innerHTML = t.labelCardNumber;
+    document.getElementById("labelExpiry").innerHTML = t.labelExpiry;
+    document.getElementById("labelCVV").innerHTML = t.labelCVV;
+    document.getElementById("completePaymentButton").value = t.completePaymentButton;
+
+    // Item names
+    const labels = document.querySelectorAll('.item-row label');
+    const langLabels = itemLabels[lang];
+    labels.forEach((label, index) => {
+      const checkbox = label.querySelector('input[type="checkbox"]');
+      if (checkbox) {
+        const value = checkbox.value;
+        label.innerHTML = `<input type="checkbox" name="item" value="${value}"> ${langLabels[index]}`;
+      }
+    });
+
+    setTimeout(() => {
+      attachCheckboxListeners();
+    }, 0);
+
+  }
+</script>
+
+
+<script>
+  const orderFormWrapper = document.getElementById('orderFormWrapper');
+  const orderForm = document.getElementById('orderForm');
+  const paymentFormWrapper = document.getElementById('paymentFormWrapper');
+  const paymentForm = document.getElementById('paymentForm');
+  const toast = document.getElementById('toast');
+  const totalDisplay = document.getElementById('totalDisplay');
+
+  const instructionText = document.querySelector('h2');
+
+function calculateTotal() {
+  let total = 0;
+  const selectedItems = [];
+  const checkboxes = orderForm.querySelectorAll('input[type="checkbox"]');
+
+  checkboxes.forEach(cb => {
+    const quantityInput = cb.closest('.item-row').querySelector('input[type="number"]');
+    if (cb.checked) {
+      quantityInput.disabled = false;
+      const [name, price] = cb.value.split(':');
+      const qty = parseInt(quantityInput.value) || 1;
+      selectedItems.push(name.trim());
+      total += parseFloat(price) * qty;
+    } else {
+      quantityInput.disabled = true;
+    }
+  });
+
+  if (selectedItems.includes("Fudge Brownie") && selectedItems.includes("Drip Coffee")) {
+    total -= 0.10 * (3.00 + 2.50);
+  }
+
+  if (selectedItems.includes("Apple Danish") && selectedItems.includes("Americano")) {
+    total -= (3.50 + 3.00 - 6.00);
+  }
+
+  totalDisplay.innerHTML = `<option>Total: $${total.toFixed(2)}</option>`;
+}
+
+
+  window.onload = () => {
+    attachCheckboxListeners();
+  };
+
+
+  orderForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    calculateTotal();
+
+    sessionStorage.setItem('bakeryTotal', totalDisplay.textContent.replace('Total: $', ''));
+
+    // Change instructional text
+    instructionText.style.opacity = 1;
+    instructionText.style.transition = 'opacity 0.5s';
+    instructionText.style.opacity = 0;
+
+    setTimeout(() => {
+      instructionText.innerHTML = 'Enter your credit card details below to complete your delicious order securely!';
+      instructionText.style.opacity = 1;
+    }, 500);
+
+    orderFormWrapper.style.opacity = 1;
+    orderFormWrapper.style.transition = 'opacity 0.5s';
+    orderFormWrapper.style.opacity = 0;
+
+    setTimeout(() => {
+      orderFormWrapper.style.display = 'none';
+      paymentFormWrapper.style.display = 'block';
+      paymentFormWrapper.style.opacity = 0;
+      paymentFormWrapper.style.transition = 'opacity 0.5s';
+      setTimeout(() => paymentFormWrapper.style.opacity = 1, 50);
+    }, 500);
+  });
+
+  paymentForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const total = sessionStorage.getItem('bakeryTotal') || '0.00';
+    const name = document.getElementById("cardName").value.trim();
+
+    toast.textContent = `Payment of $${total} from ${name} received! Enjoy your treats! 🍞☕`;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 5000);
+
+    this.reset();
+    orderForm.reset();
+    sessionStorage.removeItem('bakeryTotal');
+    totalDisplay.innerHTML = `<option>Total: $0.00</option>`;
+
+    const allQtyInputs = document.querySelectorAll('input[type="number"]');
+    allQtyInputs.forEach(input => input.disabled = true);
+
+    paymentFormWrapper.style.opacity = 1;
+    paymentFormWrapper.style.transition = 'opacity 0.5s';
+    paymentFormWrapper.style.opacity = 0;
+
+    setTimeout(() => {
+      paymentFormWrapper.style.display = 'none';
+      orderFormWrapper.style.display = 'block';
+      orderFormWrapper.style.opacity = 0;
+      orderFormWrapper.style.transition = 'opacity 0.5s';
+      setTimeout(() => orderFormWrapper.style.opacity = 1, 50);
+
+      // Restore original instruction text
+      instructionText.style.opacity = 0;
+      setTimeout(() => {
+        instructionText.innerHTML = `Choose your favorites below. If unsure, check our menu first! Remember: special discounts you see on our home page <strong>do apply</strong>.`;
+        instructionText.style.opacity = 1;
+      }, 500);
+
+    }, 500);
+  });
+  attachCheckboxListeners();
+</script>
+
+</body>
+</html>

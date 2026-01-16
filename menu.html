@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Azer's Bakery - Our Menu</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #CD7F32;
+      text-align: center;
+    }
+    footer {
+      background-color: #CD7F32;
+      padding: 5px;
+      text-align: center;
+    }
+    .logo {
+      height: 250px;
+      display: block;
+      margin: 0 auto;
+    }
+    nav {
+      background-color: #333;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 1em 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .content {
+      display: flex;
+      flex: 1;
+    }
+    .menu {
+      flex: 1.1;
+      background: #834c2f;
+      color: #f7e5c6;
+      padding: 40px 30px;
+      position: relative;
+    }
+    .menu h2 {
+      font-size: 26px;
+      margin: 30px 0 10px;
+      border-bottom: 1px solid #f7e5c677;
+      padding-bottom: 5px;
+    }
+    .menu p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      margin: 2px 0;
+      min-height: 44px;
+      padding: 6px 10px;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+      border-radius: 4px;
+      position: relative;
+    }
+    .menu p:hover {
+      background-color: #99624150;
+    }
+    .menu p:last-of-type {
+      margin-bottom: 300px;
+    }
+    .hover-preview-img {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 5px;
+      width: 250px;
+      height: auto;
+      z-index: 10;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      background-color: white;
+      display: none;
+    }
+    .menu p:hover .hover-preview-img {
+      display: block;
+    }
+    .static-stack {
+      flex: 1.3;
+      background-color: #f7e5c6;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+    }
+    .static-stack img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    @media (max-width: 800px) {
+      .content {
+        flex-direction: column;
+      }
+      .static-stack {
+        flex-direction: row;
+        height: auto;
+        justify-content: center;
+        padding: 10px;
+      }
+      .static-stack img {
+        width: 30%;
+        height: 150px;
+      }
+      .hover-preview-img {
+        width: 180px;
+      }
+    }
+  </style>
+  <script>
+    const translations = {
+      en: {
+        navHome: "Home",
+        navHow: "How It's Made",
+        navMenu: "Menu",
+        navAbout: "About Us",
+        navContact: "Contact",
+        breads: "Breads",
+        pastries: "Pastries",
+        sweets: "Sweets & Treats",
+        beverages: "Beverages",
+        footerText: "&copy; 2025 by AZER'S BAKERY. All rights reserved."
+      },
+      es: {
+        navHome: "Inicio",
+        navHow: "Cómo se Hace",
+        navMenu: "Menú",
+        navAbout: "Sobre Nosotros",
+        navContact: "Contacto",
+        breads: "Panes",
+        pastries: "Pasteles",
+        sweets: "Dulces y Postres",
+        beverages: "Bebidas",
+        footerText: "&copy; 2025 por LA PANADERÍA DE AZER. Todos los derechos reservados."
+      },
+      fr: {
+        navHome: "Accueil",
+        navHow: "Comment c'est Fait",
+        navMenu: "Menu",
+        navAbout: "À Propos",
+        navContact: "Contact",
+        breads: "Pains",
+        pastries: "Pâtisseries",
+        sweets: "Friandises & Desserts",
+        beverages: "Boissons",
+        footerText: "&copy; 2025 par LA BOULANGERIE D'AZER. Tous droits réservés."
+      }
+    };
+
+    function changeLanguage() {
+      const lang = document.getElementById("languageSelector").value;
+      const t = translations[lang];
+      document.getElementById("navHome").innerHTML = t.navHome;
+      document.getElementById("navHow").innerHTML = t.navHow;
+      document.getElementById("navMenu").innerHTML = t.navMenu;
+      document.getElementById("navAbout").innerHTML = t.navAbout;
+      document.getElementById("navContact").innerHTML = t.navContact;
+      document.getElementById("menuBreads").innerHTML = t.breads;
+      document.getElementById("menuPastries").innerHTML = t.pastries;
+      document.getElementById("menuSweets").innerHTML = t.sweets;
+      document.getElementById("menuBeverages").innerHTML = t.beverages;
+      document.getElementById("footerText").innerHTML = t.footerText;
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <img src="breadlogo.png" alt="Azer's Bakery Logo" class="logo"/>
+  </header>
+
+  <nav>
+    <a href="bakery.html" id="navHome">Home</a>
+    <a href="how.html" id="navHow">How It's Made</a>
+    <a href="menu.html" id="navMenu">Menu</a>
+    <a href="about.html" id="navAbout">About Us</a>
+    <a href="contact.html" id="navContact">Contact</a>
+    <select id="languageSelector" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+    </select>
+  </nav>
+
+  <div class="content">
+    <section class="menu">
+      <h2 id="menuBreads">Breads</h2>
+      <p><b>Sourdough Loaf</b> <span>$5.00</span><img src="sourdough.webp" alt="Sourdough" class="hover-preview-img"></p>
+      <p><b>Multigrain Loaf</b> <span>$5.50</span><img src="multigrain.jpg" alt="Multigrain" class="hover-preview-img"></p>
+      <p><b>Baguette</b> <span>$3.50</span><img src="baguette.jpg" alt="Baguette" class="hover-preview-img"></p>
+      <p><b>Brioche Loaf</b> <span>$6.00</span><img src="brioche.jpg" alt="Brioche" class="hover-preview-img"></p>
+      <p><b>Focaccia</b> <span>$4.75</span><img src="focaccia.jpg" alt="Focaccia" class="hover-preview-img"></p>
+
+      <h2 id="menuPastries">Pastries</h2>
+      <p><b>Butter Croissant</b> <span>$3.25</span><img src="buttercroissant.webp" alt="Butter Croissant" class="hover-preview-img"></p>
+      <p><b>Almond Croissant</b> <span>$3.75</span><img src="almondcroissant.jpg" alt="Almond Croissant" class="hover-preview-img"></p>
+      <p><b>Chocolate Croissant</b> <span>$3.75</span><img src="chocolatecroissant.jpg" alt="Chocolate Croissant" class="hover-preview-img"></p>
+      <p><b>Apple Danish</b> <span>$3.50</span><img src="appledanish.jpg" alt="Apple Danish" class="hover-preview-img"></p>
+      <p><b>Cinnamon Roll</b> <span>$4.00</span><img src="cinnamonroll.jpg" alt="Cinnamon Roll" class="hover-preview-img"></p>
+      <p><b>Cheese Danish</b> <span>$3.50</span><img src="cheesedanish.webp" alt="Cheese Danish" class="hover-preview-img"></p>
+
+      <h2 id="menuSweets">Sweets & Treats</h2>
+      <p><b>Chocolate Chip Cookie</b> <span>$2.00</span><img src="chocchipcookie.jpg" alt="Cookie" class="hover-preview-img"></p>
+      <p><b>Oatmeal Raisin Cookie</b> <span>$2.00</span><img src="oatmealraisin.jpg" alt="Oatmeal Cookie" class="hover-preview-img"></p>
+      <p><b>Fudge Brownie</b> <span>$3.00</span><img src="brownie.jpg" alt="Brownie" class="hover-preview-img"></p>
+      <p><b>Cupcakes</b> <span>$3.50</span><img src="cupcakes.webp" alt="Cupcakes" class="hover-preview-img"></p>
+      <p><b>Carrot Cake</b> <span>$4.25</span><img src="carrotcake.webp" alt="Carrot Cake" class="hover-preview-img"></p>
+
+      <h2 id="menuBeverages">Beverages</h2>
+      <p><b>Drip Coffee</b> <span>$2.50 / $3.00</span><img src="dripcoffee.webp" alt="Drip Coffee" class="hover-preview-img"></p>
+      <p><b>Espresso</b> <span>$2.75</span><img src="espresso.png" alt="Espresso" class="hover-preview-img"></p>
+      <p><b>Americano</b> <span>$3.00</span><img src="americano.webp" alt="Americano" class="hover-preview-img"></p>
+      <p><b>Cappuccino</b> <span>$3.75</span><img src="cappuccino.webp" alt="Cappuccino" class="hover-preview-img"></p>
+      <p><b>Latte</b> <span>$4.25</span><img src="latte.jpg" alt="Latte" class="hover-preview-img"></p>
+      <p><b>Hot Chocolate</b> <span>$3.50</span><img src="hotchocolate.jpg" alt="Hot Chocolate" class="hover-preview-img"></p>
+      <p><b>Iced Coffee</b> <span>$3.25</span><img src="icedcoffee.jpg" alt="Iced Coffee" class="hover-preview-img"></p>
+      <p><b>Bottled Water</b> <span>$1.50</span><img src="water.webp" alt="Water" class="hover-preview-img"></p>
+      <p><b>Orange Juice</b> <span>$2.75</span><img src="orangejuice.jpg" alt="OJ" class="hover-preview-img"></p>
+    </section>
+    <aside class="static-stack">
+      <img src="bread1.jpg" alt="Bread 1">
+      <img src="bread2.jpg" alt="Bread 2">
+      <img src="bread3.jpg" alt="Bread 3">
+      <img src="strawberrycheesecake.jpg" alt="Strawberry Cheesecake"> 
+    </aside>
+  </div>
+
+  <footer id="footerText">&copy; 2025 by AZER'S BAKERY. All rights reserved.</footer>
+</body>
+</html>
+
+
+
+
+
